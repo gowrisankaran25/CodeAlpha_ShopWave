@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopWave</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <!-- ── Navigation ────────────────────────────────── -->
+  <header class="nav-bar" id="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="#" onclick="navigate('home')">
+        <span class="logo-wave">Shop</span><span class="logo-main">Wave</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a onclick="navigate('home')">Shop</a>
+        <a onclick="navigate('home')" id="navCategory" data-category="Electronics">Electronics</a>
+        <a onclick="navigate('home')" id="navCategory2" data-category="Accessories">Accessories</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="search-wrap">
+          <input id="globalSearch" type="text" placeholder="Search products…" onkeydown="if(event.key==='Enter')doSearch()" />
+          <button onclick="doSearch()" class="btn-icon">⌕</button>
+        </div>
+        <button class="btn-icon cart-btn" onclick="navigate('cart')">
+          🛒 <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+        <div class="user-menu" id="userMenu">
+          <button class="btn-ghost" id="userBtn" onclick="toggleUserMenu()">Account ▾</button>
+          <div class="user-dropdown" id="userDropdown">
+            <div id="loggedOut">
+              <button onclick="openModal('login')">Sign in</button>
+              <button onclick="openModal('register')">Register</button>
+            </div>
+            <div id="loggedIn" style="display:none">
+              <span id="userName" class="dropdown-name"></span>
+              <button onclick="navigate('orders')">My Orders</button>
+              <button onclick="logout()">Sign out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Pages ────────────────────────────────────── -->
+  <main id="app"></main>
+
+  <!-- ── Toast ────────────────────────────────────── -->
+  <div id="toast" class="toast"></div>
+
+  <!-- ── Auth Modals ──────────────────────────────── -->
+  <div id="modalOverlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <!-- Login -->
+      <div id="modalLogin">
+        <h2>Welcome back</h2>
+        <p class="modal-sub">Sign in to your account</p>
+        <div class="form-group"><label>Email</label>
+          <input id="loginEmail" type="email" placeholder="you@example.com" /></div>
+        <div class="form-group"><label>Password</label>
+          <input id="loginPassword" type="password" placeholder="Password" /></div>
+        <div id="loginError" class="form-error"></div>
+        <button class="btn-primary full" onclick="doLogin()">Sign in</button>
+        <p class="modal-switch">No account? <a onclick="openModal('register')">Register</a></p>
+      </div>
+
+      <!-- Register -->
+      <div id="modalRegister" style="display:none">
+        <h2>Create account</h2>
+        <p class="modal-sub">Join ShopWave today</p>
+        <div class="form-group"><label>Full name</label>
+          <input id="regName" type="text" placeholder="Your name" /></div>
+        <div class="form-group"><label>Email</label>
+          <input id="regEmail" type="email" placeholder="you@example.com" /></div>
+        <div class="form-group"><label>Password</label>
+          <input id="regPassword" type="password" placeholder="Min. 6 characters" /></div>
+        <div id="regError" class="form-error"></div>
+        <button class="btn-primary full" onclick="doRegister()">Create account</button>
+        <p class="modal-switch">Have an account? <a onclick="openModal('login')">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
